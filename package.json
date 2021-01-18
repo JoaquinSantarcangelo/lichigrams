@@ -10,7 +10,6 @@
   "dependencies": {
     "@material-ui/core": "^4.11.2",
     "@material-ui/icons": "^4.11.2",
-    "fomantic-ui": "^2.8.7",
     "framer-motion": "^3.2.1",
     "next": "10.0.5",
     "node-sass": "^5.0.0",
