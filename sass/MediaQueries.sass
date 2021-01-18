@@ -1,0 +1,55 @@
+.app
+    @media screen and ( max-width: 1200px )
+        .card
+            width: 90%
+    @media screen and ( max-width: 900px )
+        .card
+            flex-direction: column
+            height: fit-content
+            width: 90%
+            .form
+                margin-top: 1em
+                padding-left: 0
+
+                
+    @media screen and ( max-width: 600px )
+        .card
+            width: 95%
+            padding: 0.6em
+            border-radius: 0.8em
+            .form
+                margin-top: 0.6em
+                .top-form
+                    margin-bottom: 0.6em
+                    .age
+                        padding: 0.2em 0
+                        margin-right: 0.6em
+                        input
+                            font-size: 1.1em
+                    .pronouns
+                        font-size: 1.1em
+                .message
+                    margin-bottom: 0.6em
+                    textarea
+                        font-size: 1.1em
+                .submit
+                    font-size: 1.1em
+            .info
+                border-radius: 0.8em
+                .logo
+                    img
+                        width: 80%
+                        max-width: 15em
+                .oiga-podcast
+                    width: 5em
+
+    @media screen and ( max-width: 400px )
+        .card
+            .form
+                .top-form
+                    .age
+                        flex: 0.5
+                        input
+                            padding: 0.2em 1em
+                    .pronouns
+                        flex: 0.5

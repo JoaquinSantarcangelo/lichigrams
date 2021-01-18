@@ -1,0 +1,93 @@
+@import "base"
+
+.form
+    width: 100%
+    display: flex
+    flex-direction: column
+    align-items: center
+    justify-content: center
+    padding-left: 1em
+    height: 50%
+    .top-form
+        width: 100%
+        display: flex
+        justify-content: start
+        margin-bottom: 1em
+        .age
+            margin-right: 1em
+            flex: 0.35
+            background-color: $color3
+            border-radius: 0.8em
+            border: 2px solid $color3
+            input
+                background-color: transparent
+                border: none
+                height: 100%
+                width: 100%
+                outline: none
+                font-family: "Poppins"
+                color: $color1
+                padding: 0.4em 1em
+                font-size: 1.3em
+                &::placeholder
+                    color: $color1
+        .pronouns
+            flex: 0.35
+            background-color: $color3
+            border: 2px solid $color3
+            color: $color1
+            border-radius: 0.8em
+            border: none
+            outline: none
+            padding: 0 1em
+            font-size: 1.3em
+            display: flex
+            align-items: center
+            position: relative
+            cursor: pointer
+            transition: all 0.4s ease
+            .MuiSvgIcon-root
+                margin-left: 0.2em
+            &:hover
+                transform: scale(1.025)
+                background-color: $color1
+                color: $color3
+
+        .other
+            height: 3em
+            width: 100%
+            background-color: $color3
+            border-radius: 1em
+            opacity: 0
+    .message
+        width: 100%
+        margin-bottom: 1em
+        textarea
+            border: 2px solid $color3
+            padding: 1em
+            font-size: 1.3em
+            font-family: "Poppins"
+            border: none
+            background-color: $color3
+            color: $color1
+            border-radius: 0.8em
+            height: 100%
+            width: 100%
+            outline: none
+            resize: none
+            &::placeholder
+                color: $color1
+    .submit
+        background-image: linear-gradient( 111.6deg,  $color1 27.3%, $color2 112.7% )
+        width: 100%
+        display: flex
+        align-items: center
+        justify-content: center
+        font-size: 1.3em
+        color: #ffffff
+        border-radius: 0.8em
+        padding: 0.4em
+        cursor: pointer
+        transition: all 0.4s ease
+        &:hover
+            transform: scale(1.025)
