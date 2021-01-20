@@ -7,11 +7,17 @@
     align-items: center
     justify-content: center
     width: 100%
-    img
-        height: 1.2em
-        padding: 0 0.4em
+    .heart
+        width: 2em
+        .smooth-image-wrapper
+            display: flex
+            align-items: center
+            justify-content: center
+            img
+                padding: 0 0.4em
         &:hover
             animation: heartBeat 1s infinite
+            cursor: none
     h4
         font-weight: 400
         color: $color1
