@@ -4,12 +4,23 @@ $color1: #6e3ea1
 $color2: #8b5ebb
 $color3: #e6d7f7
 
+// CSS Resets
 *,
 *::before,
 *::after
     margin: 0
     padding: 0
     box-sizing: border-box
+
+input::-webkit-outer-spin-button,
+input::-webkit-inner-spin-button
+    -webkit-appearance: none
+    margin: 0
+
+.smooth-image-wrapper
+    display: flex
+    align-items: center
+    justify-content: center
 
 .app
     width: 100vw
@@ -19,13 +30,40 @@ $color3: #e6d7f7
     display: grid
     place-items: center
     font-family: "Poppins"
-    
 
+// .active
+//     border: 2px solid $color3!important
 
-.active
-    border: 2px solid $color1!important
+// Error Class & Animation
+.error
+    animation: shake 0.82s cubic-bezier(.36,.07,.19,.97) both
+    transform: translate3d(0, 0, 0)
+    backface-visibility: hidden
+    border: 2px solid #f06363!important
 
-.smooth-image-wrapper
-    display: flex
-    align-items: center
-    justify-content: center
+@keyframes shake
+    10%, 90%
+        transform: translate3d(-1px, 0, 0)
+
+    20%, 80%
+        transform: translate3d(2px, 0, 0)
+
+    30%, 50%, 70%
+        transform: translate3d(-4px, 0, 0)
+
+    40%, 60%
+        transform: translate3d(4px, 0, 0)
+
+// Scrollbar
+
+::-webkit-scrollbar
+    width: 12px
+    background: $color2
+    border-radius: 10px
+
+::-webkit-scrollbar-track
+    border-radius: 10px
+
+::-webkit-scrollbar-thumb
+    border-radius: 10px
+    background: rgba(255,255,255,0.3)
