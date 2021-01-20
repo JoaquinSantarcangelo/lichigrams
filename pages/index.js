@@ -1,13 +1,24 @@
 import Head from "next/head";
 import { useState } from "react";
+import { motion } from "framer-motion";
 
 // Icons
 import ExpandMoreIcon from "@material-ui/icons/ExpandMore";
 
+const variants1 = {
+  hidden: { y: 20, opacity: 0 },
+  visible: {
+    y: 0,
+    opacity: 1,
+    transition: { delay: 0.1, when: "beforeChildren" },
+  },
+  exit: { y: 20, opacity: 0 },
+};
+
 export default function Home() {
   const [message, setMessage] = useState("");
   const [age, setAge] = useState(0);
-  const [pronouns, setPronouns] = useState([]);
+  const [pronouns, setPronouns] = useState({});
 
   return (
     <>
@@ -15,21 +26,67 @@ export default function Home() {
         <title>Girl, andá a terapia</title>
       </Head>
       <div className="app">
-        <div className="card">
-          <div className="info">
-            <div className="oiga-podcast">
+        <motion.div
+          variants={variants1}
+          initial="hidden"
+          animate="visible"
+          className="card"
+        >
+          <motion.div variants={variants1} className="info">
+            <motion.div variants={variants1} className="oiga-podcast">
               <img src="/img/oigaPodcast.png" alt="" />
-            </div>
-            <div className="logo">
+            </motion.div>
+            <motion.div variants={variants1} className="logo">
               <img src="/img/Logo.png" alt="" />
-            </div>
+            </motion.div>
             <div className="links">
-              <div className="link"></div>
-              <div className="link"></div>
-              <div className="link"></div>
+              <div className="link">
+                <a
+                  target="_blank"
+                  href="https://open.spotify.com/show/1WjEo53591zEBLfEL4Zhl2?si=83HtsCgUR4-qmLyG2mZ4rQ"
+                >
+                  <img
+                    src="https://cdn.worldvectorlogo.com/logos/spotify-2.svg"
+                    alt=""
+                  />
+                </a>
+              </div>
+              <div className="link">
+                <a
+                  target="_blank"
+                  href="https://open.spotify.com/show/1WjEo53591zEBLfEL4Zhl2?si=83HtsCgUR4-qmLyG2mZ4rQ"
+                >
+                  <img
+                    src="https://cdn.worldvectorlogo.com/logos/apple.svg"
+                    alt=""
+                  />
+                </a>
+              </div>
+              <div className="link">
+                <a
+                  target="_blank"
+                  href="https://open.spotify.com/show/1WjEo53591zEBLfEL4Zhl2?si=83HtsCgUR4-qmLyG2mZ4rQ"
+                >
+                  <img
+                    src="https://cdn.worldvectorlogo.com/logos/google-podcasts.svg"
+                    alt=""
+                  />
+                </a>
+              </div>
+              <div className="link">
+                <a
+                  target="_blank"
+                  href="https://open.spotify.com/show/1WjEo53591zEBLfEL4Zhl2?si=83HtsCgUR4-qmLyG2mZ4rQ"
+                >
+                  <img
+                    src="https://cdn.worldvectorlogo.com/logos/tunein-icon.svg"
+                    alt=""
+                  />
+                </a>
+              </div>
             </div>
-          </div>
-          <div className="form">
+          </motion.div>
+          <motion.div variants={variants1} className="form">
             <div className="top-form">
               <div className="age active">
                 <input placeholder="Edad" type="text" />
@@ -49,8 +106,8 @@ export default function Home() {
               ></textarea>
             </div>
             <div className="submit">Enviar</div>
-          </div>
-        </div>
+          </motion.div>
+        </motion.div>
         <div className="copyright">
           <h4>Crafted with </h4>
           <img src="/img/heart-rainbow.png" alt="" />
