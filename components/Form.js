@@ -5,12 +5,22 @@ import { AnimatePresence, motion } from "framer-motion";
 import ExpandMoreIcon from "@material-ui/icons/ExpandMore";
 import SendIcon from "@material-ui/icons/Send";
 
+const variants0 = {
+  hidden: { y: 20, opacity: 0 },
+  visible: {
+    y: 0,
+    opacity: 1,
+    transition: { delay: 0.5, when: "beforeChildren" },
+  },
+  exit: { y: 20, opacity: 0 },
+};
+
 const variants1 = {
   hidden: { y: 20, opacity: 0 },
   visible: {
     y: 0,
     opacity: 1,
-    transition: { delay: 0.1, when: "beforeChildren" },
+    transition: { delay: 0, when: "beforeChildren" },
   },
   exit: { y: 20, opacity: 0 },
 };
@@ -27,16 +37,32 @@ const Form = ({ handleSubmit }) => {
   });
 
   const [auxPronouns, setAuxPronouns] = useState([]);
+  const auxP = [];
 
   useEffect(() => {
-    console.log(auxPronouns);
+    if (pronouns.ella && !auxPronouns.find((e) => e === "Ella"))
+      console.log("Ella");
+
+    if (pronouns.elle && !auxPronouns.find((e) => e === "Elle"))
+      console.log("Elle");
+
+    if (pronouns.el && !auxPronouns.find((e) => e === "El"))
+      console.log("El");
+
+    console.log(auxP);
+    setAuxPronouns(auxP);
   }, [pronouns]);
 
   // Modal Pronouns State
   const [pronounsBox, setPronounsBox] = useState(false);
 
   return (
-    <motion.div variants={variants1} className="form">
+    <motion.div
+      variants={variants0}
+      initial="hidden"
+      animate="visible"
+      className="form"
+    >
       {/* Topform */}
       <div className="top-form">
         {/* Age */}
@@ -131,8 +157,7 @@ const Form = ({ handleSubmit }) => {
       {/* Submit Button */}
       <div
         onClick={() => {
-          auxPronouns.push(pronouns.otro);
-          handleSubmit(age, message, auxPronouns);
+          handleSubmit(age, message, auxPronouns, pronouns.otro);
 
           // Reset Form
           setAge("");
