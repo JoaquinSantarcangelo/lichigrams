@@ -46,8 +46,7 @@ const Form = ({ handleSubmit }) => {
     if (pronouns.elle && !auxPronouns.find((e) => e === "Elle"))
       console.log("Elle");
 
-    if (pronouns.el && !auxPronouns.find((e) => e === "El"))
-      console.log("El");
+    if (pronouns.el && !auxPronouns.find((e) => e === "El")) console.log("El");
 
     console.log(auxP);
     setAuxPronouns(auxP);

@@ -3,6 +3,10 @@ import { useState } from "react";
 import { motion } from "framer-motion";
 import RenderSmoothImage from "render-smooth-image-react";
 
+//Material Icons
+import CloseIcon from "@material-ui/icons/Close";
+import SendIcon from "@material-ui/icons/Send";
+
 //Components
 import Form from "../components/Form";
 import Copyright from "../components/Copyright";
@@ -15,6 +19,15 @@ const variants1 = {
     transition: { delay: 0.1, when: "beforeChildren" },
   },
   exit: { y: 20, opacity: 0 },
+};
+
+const variantsCard = {
+  hidden: { y: "-100vh" },
+  visible: {
+    y: 0,
+    transition: { delay: 0.1, duration: 0.4, when: "beforeChildren" },
+  },
+  exit: { y: "-100vh", opacity: 0 },
 };
 
 const variants0 = {
@@ -68,6 +81,8 @@ export default function Home() {
     }
   };
 
+  const [cardCollaped, setCardCollaped] = useState(false);
+
   return (
     <>
       <Head>
@@ -79,14 +94,33 @@ export default function Home() {
         animate="visible"
         className="app"
       >
+        {/* Open Card Button */}
         <motion.div
-          variants={variants1}
+          variants={variantsCard}
+          onClick={() => setCardCollaped(false)}
           initial="hidden"
-          animate="visible"
+          animate={cardCollaped ? "visible" : "hidden"}
+          className="open-card-button"
+        >
+          <SendIcon />
+        </motion.div>
+        <motion.div
+          variants={variantsCard}
+          initial="hidden"
+          animate={cardCollaped ? "hidden" : "visible"}
           className="card"
           exit="exit"
         >
-          <motion.div variants={variants1} className="info">
+          {/* Close Button */}
+          <div onClick={() => setCardCollaped(true)} className="close-button">
+            <CloseIcon />
+          </div>
+          <motion.div
+            variants={variants1}
+            initial="hidden"
+            animate="visible"
+            className="info"
+          >
             <motion.div variants={variants1} className="oiga-podcast">
               <RenderSmoothImage src={"/img/oigaPodcast.png"} />
             </motion.div>
