@@ -1,7 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { AnimatePresence, motion } from "framer-motion";
-
-import { Button } from "@chakra-ui/react";
+import { ClickAwayListener } from "@material-ui/core";
 
 // Icons
 import ExpandMoreIcon from "@material-ui/icons/ExpandMore";
@@ -28,6 +27,7 @@ const variants1 = {
   exit: { y: 20, opacity: 0 },
 };
 
+//Validation & Animations
 const validation = (age, message, pronouns) => {
   let validated = true;
 
@@ -124,61 +124,63 @@ const Form = ({ handleSubmit }) => {
           </div>
           <AnimatePresence exitBeforeEnter>
             {pronounsBox && (
-              <motion.div
-                variants={variants1}
-                initial="hidden"
-                animate="visible"
-                exit="hidden"
-                className="pronouns-box"
-              >
-                <div
-                  onClick={() =>
-                    setPronouns({
-                      ...pronouns,
-                      ella: !pronouns.ella,
-                    })
-                  }
-                  className={pronouns.ella ? "pronoun active" : "pronoun"}
+              <ClickAwayListener onClickAway={() => setPronounsBox(false)}>
+                <motion.div
+                  variants={variants1}
+                  initial="hidden"
+                  animate="visible"
+                  exit="hidden"
+                  className="pronouns-box"
                 >
-                  <div className="circle" />
-                  Ella
-                </div>
-                <div
-                  onClick={() =>
-                    setPronouns({
-                      ...pronouns,
-                      elle: !pronouns.elle,
-                    })
-                  }
-                  className={pronouns.elle ? "pronoun active" : "pronoun"}
-                >
-                  <div className="circle" />
-                  Elle
-                </div>
-                <div
-                  onClick={() =>
-                    setPronouns({
-                      ...pronouns,
-                      el: !pronouns.el,
-                    })
-                  }
-                  className="pronoun"
-                  className={pronouns.el ? "pronoun active" : "pronoun"}
-                >
-                  <div className="circle" />
-                  El
-                </div>
-                <div className="pronoun">
-                  <input
-                    onChange={(e) =>
-                      setPronouns({ ...pronouns, otro: e.target.value })
+                  <div
+                    onClick={() =>
+                      setPronouns({
+                        ...pronouns,
+                        ella: !pronouns.ella,
+                      })
                     }
-                    placeholder="Otro"
-                    value={pronouns.otro}
-                    type="text"
-                  />
-                </div>
-              </motion.div>
+                    className={pronouns.ella ? "pronoun active" : "pronoun"}
+                  >
+                    <div className="circle" />
+                    Ella
+                  </div>
+                  <div
+                    onClick={() =>
+                      setPronouns({
+                        ...pronouns,
+                        elle: !pronouns.elle,
+                      })
+                    }
+                    className={pronouns.elle ? "pronoun active" : "pronoun"}
+                  >
+                    <div className="circle" />
+                    Elle
+                  </div>
+                  <div
+                    onClick={() =>
+                      setPronouns({
+                        ...pronouns,
+                        el: !pronouns.el,
+                      })
+                    }
+                    className="pronoun"
+                    className={pronouns.el ? "pronoun active" : "pronoun"}
+                  >
+                    <div className="circle" />
+                    El
+                  </div>
+                  <div className="pronoun">
+                    <input
+                      onChange={(e) =>
+                        setPronouns({ ...pronouns, otro: e.target.value })
+                      }
+                      placeholder="Otro"
+                      value={pronouns.otro}
+                      type="text"
+                    />
+                  </div>
+                </motion.div>
+              </ClickAwayListener>
             )}
           </AnimatePresence>
         </div>

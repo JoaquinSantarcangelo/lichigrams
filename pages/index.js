@@ -53,7 +53,6 @@ const addDocument = (testimonio) => {
 export default function Home() {
   const handleSubmit = (age, message, pronouns) => {
     //Validation
-    console.log(age, message, pronouns);
 
     console.log("Sending message");
     const testimonio = {
@@ -63,7 +62,6 @@ export default function Home() {
       date: new Date(),
     };
 
-    console.log(testimonio);
     addDocument(testimonio);
   };
 
