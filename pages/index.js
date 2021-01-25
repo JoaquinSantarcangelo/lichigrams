@@ -1,8 +1,9 @@
 import Head from "next/head";
 import { useState } from "react";
 import { motion } from "framer-motion";
-import RenderSmoothImage from "render-smooth-image-react";
 import { db } from "../src/firebase";
+
+import Spotify from "../public/img/spotify.svg"
 
 //Material Icons
 import CloseIcon from "@material-ui/icons/Close";
@@ -70,7 +71,7 @@ export default function Home() {
   return (
     <>
       <Head>
-        <title>Girl, andá a terapia</title>
+        <title>Girl andá a terapia</title>
       </Head>
       <motion.div
         variants={variants0}
@@ -106,56 +107,14 @@ export default function Home() {
             className="info"
           >
             <motion.div variants={variants1} className="oiga-podcast">
-              <RenderSmoothImage src={"/img/oigaPodcast.png"} />
+              <img src={"/img/oigaPodcast.png"} />
             </motion.div>
             <motion.div variants={variants1} className="logo">
-              <RenderSmoothImage src={"/img/Logo.png"} />
+              <img src={"/img/Logo.png"} />
             </motion.div>
             <div className="links">
-              <div className="link">
-                <a
-                  target="_blank"
-                  href="https://open.spotify.com/show/1WjEo53591zEBLfEL4Zhl2?si=83HtsCgUR4-qmLyG2mZ4rQ"
-                >
-                  <img
-                    src="https://cdn.worldvectorlogo.com/logos/spotify-2.svg"
-                    alt=""
-                  />
-                </a>
-              </div>
-              <div className="link">
-                <a
-                  target="_blank"
-                  href="https://open.spotify.com/show/1WjEo53591zEBLfEL4Zhl2?si=83HtsCgUR4-qmLyG2mZ4rQ"
-                >
-                  <img
-                    src="https://cdn.worldvectorlogo.com/logos/apple.svg"
-                    alt=""
-                  />
-                </a>
-              </div>
-              <div className="link">
-                <a
-                  target="_blank"
-                  href="https://open.spotify.com/show/1WjEo53591zEBLfEL4Zhl2?si=83HtsCgUR4-qmLyG2mZ4rQ"
-                >
-                  <img
-                    src="https://cdn.worldvectorlogo.com/logos/google-podcasts.svg"
-                    alt=""
-                  />
-                </a>
-              </div>
-              <div className="link">
-                <a
-                  target="_blank"
-                  href="https://open.spotify.com/show/1WjEo53591zEBLfEL4Zhl2?si=83HtsCgUR4-qmLyG2mZ4rQ"
-                >
-                  <img
-                    src="https://cdn.worldvectorlogo.com/logos/tunein-icon.svg"
-                    alt=""
-                  />
-                </a>
-              </div>
+              <div id="spotify" className="link"></div>
+              <div id="apple-music" className=" link"></div>
             </div>
           </motion.div>
           <Form handleSubmit={handleSubmit} />

@@ -8,16 +8,26 @@
     align-items: center
     flex-direction: column
     padding-bottom: 6em
-    .title
-        margin: 0.5em 0
-        font-weight: 800
-        color: $color1
-        font-size: 3em
-        height: fit-content
+    .top-header
+        display: flex
+        width: 100%
+        align-items: center
+        justify-content: center
+        position: relative
+        background-color: $color1
+        padding: 1.25em
+        box-shadow: rgba(124, 46, 134, 0.15) 0px 25px 50px -12px
+        margin-bottom: 1em
+        .title
+            font-weight: 800
+            color: $color3
+            font-size: 3em
+            height: fit-content
+
     .wrapper
-        margin-top: 1em
-        width: 95%
-        max-width: 40em
+        width: 100%
+        max-width: 45em
+        padding: 0 2em
         display: flex
         align-items: center
         flex-direction: column
@@ -29,7 +39,10 @@
             align-items: center
             flex-direction: column
             margin-bottom: 1em
+            z-index: 100
             font-size: 1.2em
+            transition: all 0.4s ease
+            box-shadow: rgba(124, 46, 134, 0.05) 0px 25px 50px -12px
             .header
                 width: 100%
                 display: flex
@@ -39,8 +52,10 @@
                 border-bottom: 1px solid $color3
                 .wrapper
                     display: flex
+                    width: fit-content
                     flex-direction: row
                     margin-top: 0
+                    padding: 0
                     .age
                         margin-right: 0.75em
                         font-weight: 600
@@ -77,30 +92,11 @@
                 padding: 0.75em
                 width: 100%
             &:hover
-                
-
-    .favoritos
-        position: absolute
-        top: 1em
-        left: 1em
-        padding: 0.5em 2.4em 0.5em 2em
-        background-color: $color1
-        color: $color3
-        display: flex
-        align-items: center
-        justify-content: center
-        font-size: 1.5em
-        border-radius: 0.5em
-        transition: all 0.4s ease
-        .MuiSvgIcon-root
-            font-size: 1.25em
-            margin-right: 0.5em
-        &:hover
-            transform: scale(1.1)
-            cursor: pointer
+                transform: scale(1.01)
 
     .overlay
         position: fixed
+        z-index: 1000
         width: 100%
         height: 20%
         background-color: #fff
@@ -108,3 +104,24 @@
         left: 0
         background: rgb(230,215,247)
         background: linear-gradient(0deg, rgba(230,215,247,1) 0%, rgba(255,255,255,0) 100%)
+
+    @media screen and ( max-width: 800px )
+        .wrapper
+            padding: 0 1em
+            .testimonio
+                margin-top: 0em
+                margin-bottom: 0.5em
+                border-radius: 0.5em
+                .header
+                    padding: 0.5em
+                .message
+                    padding: 0.5em
+        .top-header
+            margin-bottom: 1em
+            padding: 1em
+            justify-content: space-between
+
+    @media screen and ( max-width: 500px )
+        .top-header
+            .title
+                font-size: 2.3em

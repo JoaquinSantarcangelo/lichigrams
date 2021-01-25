@@ -1,8 +1,11 @@
 import React, { useEffect, useState } from "react";
+import Head from "next/head";
 import StarIcon from "@material-ui/icons/Star";
 import { AnimatePresence, motion } from "framer-motion";
 import { db } from "../src/firebase";
 import { Spinner } from "@chakra-ui/react";
+
+import Copyright from "../components/Copyright";
 
 const variantsTestimonio = {
   visible: (i) => ({
@@ -32,9 +35,9 @@ const Testimonio = ({ t, i }) => {
           </div>
           <div className="pronouns">Ella/El</div>
         </div>
-        <div className="addFav">
+        {/* <div className="addFav">
           <StarIcon />
-        </div>
+        </div> */}
       </div>
       <div className="message">{t.data.message}</div>
     </motion.div>
@@ -46,6 +49,8 @@ const testimonios = () => {
 
   const fetchMessages = () => {
     db.collection("testimonios")
+      .orderBy("date", "desc")
+      .limit(5)
       .get()
       .then(function (snapshot) {
         setTestimonios(
@@ -62,24 +67,32 @@ const testimonios = () => {
   }, []);
 
   return (
-    <div className="testimonios">
-      <div className="overlay"></div>
-      <div className="favoritos">
-        <StarIcon />
-        Favoritos
+    <>
+      <Head>
+        <title>Testimonios • Girl anda a terapia</title>
+      </Head>
+      <div className="testimonios">
+        <div className="overlay"></div>
+        <div className="top-header">
+          <div className="title">Testimonios</div>
+          {/* <div className="favoritos">
+          <StarIcon />
+          <span>Favoritos</span>
+        </div> */}
+        </div>
+        <div className="wrapper">
+          <AnimatePresence exitBeforeEnter>
+            {testimonios.map((t, i) => {
+              return <Testimonio t={t} i={i} />;
+            })}
+          </AnimatePresence>
+          {testimonios.length < 1 && (
+            <Spinner thickness="4px" size="xl" color="brand.100" />
+          )}
+        </div>
       </div>
-      <div className="title">Testimonios</div>
-      <div className="wrapper">
-        <AnimatePresence exitBeforeEnter>
-          {testimonios.map((t, i) => {
-            return <Testimonio t={t} i={i} />;
-          })}
-        </AnimatePresence>
-        {testimonios.length < 1 && (
-          <Spinner thickness="4px" size="xl" color="6e3ea1" />
-        )}
-      </div>
-    </div>
+      <Copyright />
+    </>
   );
 };
 
