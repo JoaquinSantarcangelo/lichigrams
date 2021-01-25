@@ -28,6 +28,40 @@ const variants1 = {
   exit: { y: 20, opacity: 0 },
 };
 
+const validation = (age, message, pronouns) => {
+  let validated = true;
+
+  //Animations & Validation
+  if (age === "") {
+    document.querySelector("#age").classList.add("error");
+    setTimeout(
+      () => document.querySelector("#age").classList.remove("error"),
+      1000
+    );
+    validated = false;
+  }
+
+  if (pronouns.length < 1) {
+    document.querySelector("#pronouns").classList.add("error");
+    setTimeout(
+      () => document.querySelector("#pronouns").classList.remove("error"),
+      1000
+    );
+    validated = false;
+  }
+
+  if (message === "") {
+    document.querySelector("#message").classList.add("error");
+    setTimeout(
+      () => document.querySelector("#message").classList.remove("error"),
+      1000
+    );
+    validated = false;
+  }
+
+  return validated;
+};
+
 const Form = ({ handleSubmit }) => {
   // Form State
   const [message, setMessage] = useState("");
@@ -43,18 +77,21 @@ const Form = ({ handleSubmit }) => {
   const [pronounsBox, setPronounsBox] = useState(false);
 
   const onSubmit = () => {
+    age.trim();
     const auxPronouns = [];
     if (pronouns.ella) auxPronouns.push("Ella");
     if (pronouns.elle) auxPronouns.push("Elle");
     if (pronouns.el) auxPronouns.push("El");
     if (pronouns.otro !== "") auxPronouns.push(pronouns.otro);
 
-    handleSubmit(age, message, auxPronouns);
+    if (validation(age, message, auxPronouns)) {
+      handleSubmit(age, message, auxPronouns);
 
-    // Reset Form
-    setAge("");
-    setMessage("");
-    setPronouns({ ella: false, elle: false, el: false, otro: "" });
+      // Reset Form
+      setAge("");
+      setMessage("");
+      setPronouns({ ella: false, elle: false, el: false, otro: "" });
+    }
   };
 
   return (

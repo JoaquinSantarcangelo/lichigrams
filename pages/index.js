@@ -53,36 +53,7 @@ const addDocument = (testimonio) => {
 export default function Home() {
   const handleSubmit = (age, message, pronouns) => {
     //Validation
-    age.trim();
     console.log(age, message, pronouns);
-
-    //Animations & Validation
-    if (age === "") {
-      document.querySelector("#age").classList.add("error");
-      setTimeout(
-        () => document.querySelector("#age").classList.remove("error"),
-        1000
-      );
-      return;
-    }
-
-    if (pronouns.length < 1) {
-      document.querySelector("#pronouns").classList.add("error");
-      setTimeout(
-        () => document.querySelector("#pronouns").classList.remove("error"),
-        1000
-      );
-      return;
-    }
-
-    if (message === "") {
-      document.querySelector("#message").classList.add("error");
-      setTimeout(
-        () => document.querySelector("#message").classList.remove("error"),
-        1000
-      );
-      return;
-    }
 
     console.log("Sending message");
     const testimonio = {
@@ -93,7 +64,7 @@ export default function Home() {
     };
 
     console.log(testimonio);
-    addDocument(testimonio)
+    addDocument(testimonio);
   };
 
   const [cardCollaped, setCardCollaped] = useState(false);
