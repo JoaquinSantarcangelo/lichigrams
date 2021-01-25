@@ -3,7 +3,7 @@ import { useState } from "react";
 import { motion } from "framer-motion";
 import { db } from "../src/firebase";
 
-import Spotify from "../public/img/spotify.svg"
+import Spotify from "../public/img/spotify.svg";
 
 //Material Icons
 import CloseIcon from "@material-ui/icons/Close";
@@ -59,7 +59,7 @@ export default function Home() {
     const testimonio = {
       age: age,
       message: message,
-      pronous: pronouns,
+      pronouns: pronouns,
       date: new Date(),
     };
 
@@ -113,8 +113,34 @@ export default function Home() {
               <img src={"/img/Logo.png"} />
             </motion.div>
             <div className="links">
-              <div id="spotify" className="link"></div>
-              <div id="apple-music" className=" link"></div>
+              <div id="spotify" className="link">
+                <div className="text">Escuchalo en</div>
+                <div className="logo">
+                  <a
+                    target="_blank"
+                    href="https://open.spotify.com/show/1WjEo53591zEBLfEL4Zhl2"
+                  >
+                    <img
+                      src="https://cdn.worldvectorlogo.com/logos/spotify-1.svg"
+                      alt="spotify logo"
+                    />
+                  </a>
+                </div>
+              </div>
+              <div id="apple-music" className=" link">
+                <div className="text">Escuchalo en</div>
+                <div className="logo">
+                  <a
+                    target="_blank"
+                    href="https://podcasts.apple.com/ar/podcast/girl-and%C3%A1-a-terapia/id1518305434"
+                  >
+                    <img
+                      src="https://cdn.worldvectorlogo.com/logos/apple-music.svg"
+                      alt="apple music logo"
+                    />
+                  </a>
+                </div>
+              </div>
             </div>
           </motion.div>
           <Form handleSubmit={handleSubmit} />
