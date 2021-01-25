@@ -1,10 +1,13 @@
 import React, { useEffect, useState } from "react";
 import { AnimatePresence, motion } from "framer-motion";
 
+import { Button } from "@chakra-ui/react";
+
 // Icons
 import ExpandMoreIcon from "@material-ui/icons/ExpandMore";
 import SendIcon from "@material-ui/icons/Send";
 
+//Framer Motion Variants
 const variants0 = {
   hidden: { y: 20, opacity: 0 },
   visible: {
@@ -36,24 +39,23 @@ const Form = ({ handleSubmit }) => {
     otro: "",
   });
 
-  const [auxPronouns, setAuxPronouns] = useState([]);
-  const auxP = [];
-
-  useEffect(() => {
-    if (pronouns.ella && !auxPronouns.find((e) => e === "Ella"))
-      console.log("Ella");
-
-    if (pronouns.elle && !auxPronouns.find((e) => e === "Elle"))
-      console.log("Elle");
-
-    if (pronouns.el && !auxPronouns.find((e) => e === "El")) console.log("El");
-
-    console.log(auxP);
-    setAuxPronouns(auxP);
-  }, [pronouns]);
-
   // Modal Pronouns State
   const [pronounsBox, setPronounsBox] = useState(false);
+
+  const onSubmit = () => {
+    const auxPronouns = [];
+    if (pronouns.ella) auxPronouns.push("Ella");
+    if (pronouns.elle) auxPronouns.push("Elle");
+    if (pronouns.el) auxPronouns.push("El");
+    if (pronouns.otro !== "") auxPronouns.push(pronouns.otro);
+
+    handleSubmit(age, message, auxPronouns);
+
+    // Reset Form
+    setAge("");
+    setMessage("");
+    setPronouns({ ella: false, elle: false, el: false, otro: "" });
+  };
 
   return (
     <motion.div
@@ -154,17 +156,7 @@ const Form = ({ handleSubmit }) => {
         ></textarea>
       </div>
       {/* Submit Button */}
-      <div
-        onClick={() => {
-          handleSubmit(age, message, auxPronouns, pronouns.otro);
-
-          // Reset Form
-          setAge("");
-          setMessage("");
-          setPronouns({ ella: false, elle: false, el: false, otro: "" });
-        }}
-        className="submit"
-      >
+      <div onClick={() => onSubmit()} className="submit">
         <SendIcon />
         Enviar
       </div>

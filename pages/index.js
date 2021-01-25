@@ -2,6 +2,7 @@ import Head from "next/head";
 import { useState } from "react";
 import { motion } from "framer-motion";
 import RenderSmoothImage from "render-smooth-image-react";
+import { db } from "../src/firebase";
 
 //Material Icons
 import CloseIcon from "@material-ui/icons/Close";
@@ -38,18 +39,31 @@ const variants0 = {
   },
 };
 
+const addDocument = (testimonio) => {
+  db.collection("testimonios")
+    .add(testimonio)
+    .then(function () {
+      console.log("Document successfully written!");
+    })
+    .catch(function (error) {
+      console.error("Error writing document: ", error);
+    });
+};
+
 export default function Home() {
   const handleSubmit = (age, message, pronouns) => {
     //Validation
     age.trim();
+    console.log(age, message, pronouns);
 
-    //Animations
+    //Animations & Validation
     if (age === "") {
       document.querySelector("#age").classList.add("error");
       setTimeout(
         () => document.querySelector("#age").classList.remove("error"),
         1000
       );
+      return;
     }
 
     if (pronouns.length < 1) {
@@ -58,6 +72,7 @@ export default function Home() {
         () => document.querySelector("#pronouns").classList.remove("error"),
         1000
       );
+      return;
     }
 
     if (message === "") {
@@ -66,19 +81,19 @@ export default function Home() {
         () => document.querySelector("#message").classList.remove("error"),
         1000
       );
+      return;
     }
 
-    // Send Message
-    if (age && message && pronouns.length < 1) {
-      const testimonio = {
-        age: age,
-        message: message,
-        pronous: pronouns,
-        date: new Date(),
-      };
+    console.log("Sending message");
+    const testimonio = {
+      age: age,
+      message: message,
+      pronous: pronouns,
+      date: new Date(),
+    };
 
-      console.log(testimonio);
-    }
+    console.log(testimonio);
+    addDocument(testimonio)
   };
 
   const [cardCollaped, setCardCollaped] = useState(false);
@@ -112,9 +127,9 @@ export default function Home() {
           exit="exit"
         >
           {/* Close Button */}
-          <div onClick={() => setCardCollaped(true)} className="close-button">
+          {/* <div onClick={() => setCardCollaped(true)} className="close-button">
             <CloseIcon />
-          </div>
+          </div> */}
           <motion.div
             variants={variants1}
             initial="hidden"
