@@ -73,13 +73,38 @@ const Testimonio = ({ t, i }) => {
 
 const testimonios = () => {
   const [testimonios, setTestimonios] = useState([]);
+  const [lastDoc, setLastDoc] = useState(null);
+
+  const loadMore = () => {
+    console.log("Dame mas perro");
+
+    db.collection("testimonios")
+      .orderBy("date", "desc")
+      .startAfter(lastDoc)
+      .limit(10)
+      .get()
+      .then(function (snapshot) {
+        if (snapshot.docs.length > 0) {
+          setLastDoc(snapshot.docs[snapshot.docs.length - 1]);
+          const aux = snapshot.docs.map((doc) => ({
+            id: doc.id,
+            data: doc.data(),
+          }));
+          setTestimonios((testimonios) => [...testimonios, ...aux]);
+        } else {
+          document.querySelector(".load-more").classList.add("hide");
+        }
+      });
+  };
 
   const fetchMessages = () => {
     db.collection("testimonios")
       .orderBy("date", "desc")
-      .limit(5)
+      .limit(10)
       .get()
       .then(function (snapshot) {
+        setLastDoc(snapshot.docs[snapshot.docs.length - 1]);
+
         setTestimonios(
           snapshot.docs.map((doc) => ({
             id: doc.id,
@@ -110,8 +135,18 @@ const testimonios = () => {
         <div className="wrapper">
           <AnimatePresence exitBeforeEnter>
             {testimonios.map((t, i) => {
-              return <Testimonio key={i} t={t} i={i} />;
+              return <Testimonio key={t.id} t={t} i={i} />;
             })}
+            {testimonios.length > 1 && (
+              <motion.div
+                initial={{ opacity: 0 }}
+                animate={{ opacity: 1 }}
+                className="load-more"
+                onClick={() => loadMore()}
+              >
+                Cargar más...
+              </motion.div>
+            )}
           </AnimatePresence>
           {testimonios.length < 1 && (
             <Spinner thickness="4px" size="xl" color="brand.100" />

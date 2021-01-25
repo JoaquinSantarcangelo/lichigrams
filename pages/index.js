@@ -2,6 +2,7 @@ import Head from "next/head";
 import { useState } from "react";
 import { motion } from "framer-motion";
 import { db } from "../src/firebase";
+import { useToast } from "@chakra-ui/react";
 
 //Material Icons
 import CloseIcon from "@material-ui/icons/Close";
@@ -52,6 +53,9 @@ const addDocument = (testimonio) => {
 };
 
 export default function Home() {
+  //Toast Notification
+  const toast = useToast();
+
   //Handle Submit
   const handleSubmit = (age, message, pronouns) => {
     //Validation
@@ -63,6 +67,15 @@ export default function Home() {
       pronouns: pronouns,
       date: new Date(),
     };
+
+    toast({
+      title: "Testimonio enviado",
+      description: "Gracias por tu aporte 💜",
+      status: "success",
+      position: "top",
+      duration: 3000,
+      isClosable: true,
+    });
 
     addDocument(testimonio);
   };
@@ -115,18 +128,28 @@ export default function Home() {
               <img src={"/img/Logo.png"} />
             </motion.div>
             <div className="links-mobile">
-              <div id="spotify" className="link">
-                <img
-                  src="https://cdn.worldvectorlogo.com/logos/spotify-2.svg"
-                  alt=""
-                />
-              </div>
-              <div id="apple-music"className="link">
-                <img
-                  src="https://cdn.worldvectorlogo.com/logos/apple-black.svg"
-                  alt=""
-                />
-              </div>
+              <a
+                target="_blank"
+                href="https://open.spotify.com/show/1WjEo53591zEBLfEL4Zhl2"
+              >
+                <div id="spotify" className="link">
+                  <img
+                    src="https://cdn.worldvectorlogo.com/logos/spotify-2.svg"
+                    alt=""
+                  />
+                </div>
+              </a>
+              <a
+                target="_blank"
+                href="https://podcasts.apple.com/ar/podcast/girl-and%C3%A1-a-terapia/id1518305434"
+              >
+                <div id="apple-music" className="link">
+                  <img
+                    src="https://cdn.worldvectorlogo.com/logos/apple-black.svg"
+                    alt=""
+                  />
+                </div>
+              </a>
             </div>
             <div className="links">
               <div id="spotify" className="link">
@@ -143,6 +166,7 @@ export default function Home() {
                   </a>
                 </div>
               </div>
+
               <div id="apple-music" className=" link">
                 <div className="text">Escuchalo en</div>
                 <div className="logo">
