@@ -3,8 +3,6 @@ import { useState } from "react";
 import { motion } from "framer-motion";
 import { db } from "../src/firebase";
 
-import Spotify from "../public/img/spotify.svg";
-
 //Material Icons
 import CloseIcon from "@material-ui/icons/Close";
 import SendIcon from "@material-ui/icons/Send";
@@ -13,6 +11,7 @@ import SendIcon from "@material-ui/icons/Send";
 import Form from "../components/Form";
 import Copyright from "../components/Copyright";
 
+//Framer Motion Variants
 const variants1 = {
   hidden: { y: 20, opacity: 0 },
   visible: {
@@ -40,6 +39,7 @@ const variants0 = {
   },
 };
 
+//Firebase Add Dcoument
 const addDocument = (testimonio) => {
   db.collection("testimonios")
     .add(testimonio)
@@ -52,6 +52,7 @@ const addDocument = (testimonio) => {
 };
 
 export default function Home() {
+  //Handle Submit
   const handleSubmit = (age, message, pronouns) => {
     //Validation
 
@@ -66,6 +67,7 @@ export default function Home() {
     addDocument(testimonio);
   };
 
+  //Collapse Hooks (future feature)
   const [cardCollaped, setCardCollaped] = useState(false);
 
   return (
@@ -112,6 +114,20 @@ export default function Home() {
             <motion.div variants={variants1} className="logo">
               <img src={"/img/Logo.png"} />
             </motion.div>
+            <div className="links-mobile">
+              <div id="spotify" className="link">
+                <img
+                  src="https://cdn.worldvectorlogo.com/logos/spotify-2.svg"
+                  alt=""
+                />
+              </div>
+              <div id="apple-music"className="link">
+                <img
+                  src="https://cdn.worldvectorlogo.com/logos/apple-black.svg"
+                  alt=""
+                />
+              </div>
+            </div>
             <div className="links">
               <div id="spotify" className="link">
                 <div className="text">Escuchalo en</div>

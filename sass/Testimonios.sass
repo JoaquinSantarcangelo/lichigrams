@@ -75,6 +75,7 @@
                     align-items: center
                     justify-content: center
                     transition: all 0.4s ease
+                    opacity: 0
                     .MuiSvgIcon-root
                         font-size: 1.6em
                         transition: all 0.4s ease
@@ -96,6 +97,8 @@
                 padding: 0.75em
                 width: 100%
             &:hover
+                .download
+                    opacity: 1
                 transform: scale(1.01)
 
     .overlay
@@ -130,6 +133,7 @@
             .title
                 font-size: 2.3em
         .wrapper
+            padding: 0 0.5em
             .testimonio
                 .header
                     .wrapper
