@@ -4,12 +4,12 @@ import "firebase/firestore";
 
 const config = {
   apiKey: process.env.FIREBASE_KEY,
-  authDomain: "girl-anda-a-terapia.firebaseapp.com",
-  projectId: "girl-anda-a-terapia",
-  storageBucket: "girl-anda-a-terapia.appspot.com",
-  messagingSenderId: "336120035841",
-  appId: "1:336120035841:web:1f9caf8be272c155d99e00",
-  measurementId: "G-D37YV0LEF3",
+  authDomain: "lichigrams.firebaseapp.com",
+  projectId: "lichigrams",
+  storageBucket: "lichigrams.appspot.com",
+  messagingSenderId: "751118918399",
+  appId: "1:751118918399:web:f634525c63ed40d8de62ca",
+  measurementId: "G-FGEYWV6GWR",
 };
 
 if (!firebase.apps.length) {

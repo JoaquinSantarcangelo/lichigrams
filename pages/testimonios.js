@@ -5,8 +5,8 @@ import { AnimatePresence, motion } from "framer-motion";
 import { db } from "../src/firebase";
 import { Spinner } from "@chakra-ui/react";
 import * as htmlToImage from "html-to-image";
-import { toPng } from "html-to-image";
 import download from "downloadjs";
+
 
 //Components
 import Copyright from "../components/Copyright";
@@ -24,8 +24,8 @@ const variantsTestimonio = {
 
 //Handle Download
 const handleDownload = (ref, id) => {
-  htmlToImage.toPng(ref.current).then(function (dataUrl) {
-    download(dataUrl, `${id}.png`);
+  htmlToImage.toSvg(ref.current).then(function (dataUrl) {
+    download(dataUrl, `${id}.svg`);
   });
 };
 
@@ -73,12 +73,17 @@ const Testimonio = ({ t, i }) => {
 
 const testimonios = () => {
   const [testimonios, setTestimonios] = useState([]);
+  const [collection, setCollection] = useState("consultrolo")
   const [lastDoc, setLastDoc] = useState(null);
+
+  useEffect(() => {
+    fetchMessages();
+  }, [collection]);
 
   const loadMore = () => {
     console.log("Dame mas perro");
 
-    db.collection("testimonios")
+    db.collection(collection)
       .orderBy("date", "desc")
       .startAfter(lastDoc)
       .limit(10)
@@ -92,13 +97,14 @@ const testimonios = () => {
           }));
           setTestimonios((testimonios) => [...testimonios, ...aux]);
         } else {
+          document.querySelector(".no-more").classList.remove("hide");
           document.querySelector(".load-more").classList.add("hide");
         }
       });
   };
 
   const fetchMessages = () => {
-    db.collection("testimonios")
+    db.collection(collection)
       .orderBy("date", "desc")
       .limit(10)
       .get()
@@ -114,9 +120,6 @@ const testimonios = () => {
       });
   };
 
-  useEffect(() => {
-    fetchMessages();
-  }, []);
 
   return (
     <>
@@ -141,12 +144,16 @@ const testimonios = () => {
               <motion.div
                 initial={{ opacity: 0 }}
                 animate={{ opacity: 1 }}
+                exit={{opacity: 0}}
                 className="load-more"
                 onClick={() => loadMore()}
               >
                 Cargar más...
               </motion.div>
             )}
+            <div className="no-more hide">
+              No hay mas :(
+            </div>
           </AnimatePresence>
           {testimonios.length < 1 && (
             <Spinner thickness="4px" size="xl" color="brand.100" />

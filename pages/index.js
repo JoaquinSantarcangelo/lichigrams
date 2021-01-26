@@ -40,19 +40,19 @@ const variants0 = {
   },
 };
 
-//Firebase Add Dcoument
-const addDocument = (testimonio) => {
-  db.collection("testimonios")
-    .add(testimonio)
-    .then(function () {
-      console.log("Document successfully written!");
-    })
-    .catch(function (error) {
-      console.error("Error writing document: ", error);
-    });
-};
-
 export default function Home() {
+  //Firebase Add Document
+  const addDocument = (testimonio) => {
+    db.collection(collection)
+      .add(testimonio)
+      .then(function () {
+        console.log("Document successfully written!");
+      })
+      .catch(function (error) {
+        console.error("Error writing document: ", error);
+      });
+  };
+
   //Toast Notification
   const toast = useToast();
 
@@ -80,13 +80,16 @@ export default function Home() {
     addDocument(testimonio);
   };
 
+  //--Hooks--//
+  const [collection, setCollection] = useState("consultrolo");
+
   //Collapse Hooks (future feature)
   const [cardCollaped, setCardCollaped] = useState(false);
 
   return (
     <>
       <Head>
-        <title>Girl andá a terapia</title>
+        <title>Lichigrams</title>
       </Head>
       <motion.div
         variants={variants0}
@@ -121,67 +124,9 @@ export default function Home() {
             animate="visible"
             className="info"
           >
-            <motion.div variants={variants1} className="oiga-podcast">
-              <img src={"/img/oigaPodcast.png"} />
+            <motion.div variants={variants1} className="title">
+              <h1>Consultrolo</h1>
             </motion.div>
-            <motion.div variants={variants1} className="logo">
-              <img src={"/img/Logo.png"} />
-            </motion.div>
-            <div className="links-mobile">
-              <a
-                target="_blank"
-                href="https://open.spotify.com/show/1WjEo53591zEBLfEL4Zhl2"
-              >
-                <div id="spotify" className="link">
-                  <img
-                    src="https://cdn.worldvectorlogo.com/logos/spotify-2.svg"
-                    alt=""
-                  />
-                </div>
-              </a>
-              <a
-                target="_blank"
-                href="https://podcasts.apple.com/ar/podcast/girl-and%C3%A1-a-terapia/id1518305434"
-              >
-                <div id="apple-music" className="link">
-                  <img
-                    src="https://cdn.worldvectorlogo.com/logos/apple-black.svg"
-                    alt=""
-                  />
-                </div>
-              </a>
-            </div>
-            <div className="links">
-              <div id="spotify" className="link">
-                <div className="text">Escuchalo en</div>
-                <div className="logo">
-                  <a
-                    target="_blank"
-                    href="https://open.spotify.com/show/1WjEo53591zEBLfEL4Zhl2"
-                  >
-                    <img
-                      src="https://cdn.worldvectorlogo.com/logos/spotify-1.svg"
-                      alt="spotify logo"
-                    />
-                  </a>
-                </div>
-              </div>
-
-              <div id="apple-music" className=" link">
-                <div className="text">Escuchalo en</div>
-                <div className="logo">
-                  <a
-                    target="_blank"
-                    href="https://podcasts.apple.com/ar/podcast/girl-and%C3%A1-a-terapia/id1518305434"
-                  >
-                    <img
-                      src="https://cdn.worldvectorlogo.com/logos/apple-music.svg"
-                      alt="apple music logo"
-                    />
-                  </a>
-                </div>
-              </div>
-            </div>
           </motion.div>
           <Form handleSubmit={handleSubmit} />
         </motion.div>

@@ -1,5 +1,5 @@
 {
-  "name": "girl-anda-a-terapia",
+  "name": "lichigrams",
   "version": "0.1.0",
   "private": true,
   "scripts": {
@@ -25,3 +25,4 @@
     "render-smooth-image-react": "^1.0.0"
   }
 }
+
