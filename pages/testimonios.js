@@ -23,8 +23,8 @@ const variantsTestimonio = {
 
 //Handle Download
 const handleDownload = (ref, id) => {
-  htmlToImage.toSvg(ref.current).then(function (dataUrl) {
-    download(dataUrl, `${id}.svg`);
+  htmlToImage.toPng(ref.current).then(function (dataUrl) {
+    download(dataUrl, `${id}.png`);
   });
 };
 
