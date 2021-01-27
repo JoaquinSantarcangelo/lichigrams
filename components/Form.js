@@ -104,7 +104,7 @@ const Form = ({ handleSubmit, collection }) => {
     >
       {/* Topform */}
       <AnimatePresence exitBeforeEnter>
-        {collection === "consultrolo" && (
+        {collection && (
           <motion.div
             variants={variants1}
             initial="hidden"
