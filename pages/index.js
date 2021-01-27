@@ -155,7 +155,7 @@ export default function Home() {
               )}
             </motion.div>
           </motion.div>
-          <Form handleSubmit={handleSubmit} />
+          <Form collection={collection} handleSubmit={handleSubmit} />
         </motion.div>
 
         <Copyright />

@@ -1,11 +1,13 @@
 import React, { useEffect, useState, useRef } from "react";
 import Head from "next/head";
-import GetAppIcon from "@material-ui/icons/GetApp";
 import { AnimatePresence, motion } from "framer-motion";
 import { db } from "../src/firebase";
 import { Spinner } from "@chakra-ui/react";
 import * as htmlToImage from "html-to-image";
 import download from "downloadjs";
+
+//Icons
+import GetAppIcon from "@material-ui/icons/GetApp";
 
 //Components
 import Copyright from "../components/Copyright";
@@ -28,7 +30,9 @@ const handleDownload = (ref, id) => {
   });
 };
 
+// Component: Testimonio
 const Testimonio = ({ t, i }) => {
+  //Pronouns to String
   const pronounsToString = () => {
     let aux = "";
     if (t.data.pronouns[0]) aux = aux.concat("", t.data.pronouns[0]);
@@ -72,21 +76,41 @@ const Testimonio = ({ t, i }) => {
 };
 
 const testimonios = () => {
+  //Hooks Firebase Fetching
   const [testimonios, setTestimonios] = useState([]);
   const [collection, setCollection] = useState("consultrolo");
   const [lastDoc, setLastDoc] = useState(null);
 
+  //UseEffect for auto-fetching when collection changes
   useEffect(() => {
     fetchMessages();
 
-    const noMore = document.querySelector(".no-more")
+    const noMore = document.querySelector(".no-more");
     noMore && noMore.classList.add("hide");
 
-    const loadMore = document.querySelector(".load-more")
+    const loadMore = document.querySelector(".load-more");
     loadMore && loadMore.classList.remove("hide");
-
   }, [collection]);
 
+  //Fetch Collection
+  const fetchMessages = () => {
+    db.collection(collection)
+      .orderBy("date", "desc")
+      .limit(10)
+      .get()
+      .then(function (snapshot) {
+        setLastDoc(snapshot.docs[snapshot.docs.length - 1]);
+
+        setTestimonios(
+          snapshot.docs.map((doc) => ({
+            id: doc.id,
+            data: doc.data(),
+          }))
+        );
+      });
+  };
+
+  //Fetch more Docs
   const loadMore = () => {
     console.log("Dame mas perro");
 
@@ -110,28 +134,10 @@ const testimonios = () => {
       });
   };
 
-  const fetchMessages = () => {
-    
-    db.collection(collection)
-      .orderBy("date", "desc")
-      .limit(10)
-      .get()
-      .then(function (snapshot) {
-        setLastDoc(snapshot.docs[snapshot.docs.length - 1]);
-
-        setTestimonios(
-          snapshot.docs.map((doc) => ({
-            id: doc.id,
-            data: doc.data(),
-          }))
-        );
-      });
-  };
-
   return (
     <>
       <Head>
-        <title>Testimonios • Girl anda a terapia</title>
+        <title>Testimonios • Lichigrams</title>
       </Head>
       <div className="testimonios">
         <div className="overlay"></div>
