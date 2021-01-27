@@ -7,7 +7,6 @@ import { Spinner } from "@chakra-ui/react";
 import * as htmlToImage from "html-to-image";
 import download from "downloadjs";
 
-
 //Components
 import Copyright from "../components/Copyright";
 
@@ -47,6 +46,7 @@ const Testimonio = ({ t, i }) => {
       custom={i}
       initial="hidden"
       animate="visible"
+      exit="hidden"
       variants={variantsTestimonio}
       key={i}
       className="testimonio"
@@ -73,11 +73,18 @@ const Testimonio = ({ t, i }) => {
 
 const testimonios = () => {
   const [testimonios, setTestimonios] = useState([]);
-  const [collection, setCollection] = useState("consultrolo")
+  const [collection, setCollection] = useState("consultrolo");
   const [lastDoc, setLastDoc] = useState(null);
 
   useEffect(() => {
     fetchMessages();
+
+    const noMore = document.querySelector(".no-more")
+    noMore && noMore.classList.add("hide");
+
+    const loadMore = document.querySelector(".load-more")
+    loadMore && loadMore.classList.remove("hide");
+
   }, [collection]);
 
   const loadMore = () => {
@@ -104,6 +111,7 @@ const testimonios = () => {
   };
 
   const fetchMessages = () => {
+    
     db.collection(collection)
       .orderBy("date", "desc")
       .limit(10)
@@ -120,7 +128,6 @@ const testimonios = () => {
       });
   };
 
-
   return (
     <>
       <Head>
@@ -130,30 +137,48 @@ const testimonios = () => {
         <div className="overlay"></div>
         <div className="top-header">
           <div className="title">Testimonios</div>
-          {/* <div className="favoritos">
-          <StarIcon />
-          <span>Favoritos</span>
-        </div> */}
+          <div className="selector">
+            <div
+              onClick={() => setCollection("consultrolo")}
+              className={
+                collection === "consultrolo"
+                  ? "collection active"
+                  : "collection"
+              }
+            >
+              Consultrolo
+            </div>
+            <div
+              onClick={() => setCollection("deciloDeUnaVez")}
+              className={
+                collection === "deciloDeUnaVez"
+                  ? "collection active"
+                  : "collection"
+              }
+            >
+              Decilo de una vez
+            </div>
+          </div>
         </div>
         <div className="wrapper">
           <AnimatePresence exitBeforeEnter>
-            {testimonios.map((t, i) => {
-              return <Testimonio key={t.id} t={t} i={i} />;
-            })}
-            {testimonios.length > 1 && (
-              <motion.div
-                initial={{ opacity: 0 }}
-                animate={{ opacity: 1 }}
-                exit={{opacity: 0}}
-                className="load-more"
-                onClick={() => loadMore()}
-              >
-                Cargar más...
-              </motion.div>
-            )}
-            <div className="no-more hide">
-              No hay mas :(
-            </div>
+            <>
+              {testimonios.map((t, i) => {
+                return <Testimonio key={t.id} t={t} i={i} />;
+              })}
+              {testimonios.length > 1 && (
+                <motion.div
+                  initial={{ opacity: 0 }}
+                  animate={{ opacity: 1 }}
+                  exit={{ opacity: 0 }}
+                  className="load-more"
+                  onClick={() => loadMore()}
+                >
+                  Cargar más...
+                </motion.div>
+              )}
+              <div className="no-more hide">No hay mas :(</div>
+            </>
           </AnimatePresence>
           {testimonios.length < 1 && (
             <Spinner thickness="4px" size="xl" color="brand.100" />

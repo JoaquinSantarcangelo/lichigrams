@@ -70,7 +70,7 @@ export default function Home() {
 
     toast({
       title: "Testimonio enviado",
-      description: "Gracias por tu aporte 💜",
+      description: "Gracias por tu aporte 💗",
       status: "success",
       position: "top",
       duration: 3000,
@@ -81,7 +81,7 @@ export default function Home() {
   };
 
   //--Hooks--//
-  const [collection, setCollection] = useState("consultrolo");
+  const [collection, setCollection] = useState("deciloDeUnaVez");
 
   //Collapse Hooks (future feature)
   const [cardCollaped, setCardCollaped] = useState(false);
@@ -124,8 +124,35 @@ export default function Home() {
             animate="visible"
             className="info"
           >
+            <div className="selector">
+              <div
+                onClick={() => setCollection("consultrolo")}
+                className={
+                  collection === "consultrolo"
+                    ? "collection active"
+                    : "collection"
+                }
+              >
+                Consultrolo
+              </div>
+              <div
+                onClick={() => setCollection("deciloDeUnaVez")}
+                className={
+                  collection === "deciloDeUnaVez"
+                    ? "collection active"
+                    : "collection"
+                }
+              >
+                Decilo de una vez
+              </div>
+            </div>
             <motion.div variants={variants1} className="title">
-              <h1>Consultrolo</h1>
+              {collection === "consultrolo" && (
+                <motion.h1 variants={variants0}>Consultrolo</motion.h1>
+              )}
+              {collection === "deciloDeUnaVez" && (
+                <motion.h1 variants={variants0}>Decilo de una vez</motion.h1>
+              )}
             </motion.div>
           </motion.div>
           <Form handleSubmit={handleSubmit} />

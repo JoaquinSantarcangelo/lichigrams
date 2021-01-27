@@ -2,6 +2,9 @@
     @media screen and ( max-width: 1300px )
         .card
             width: 90%
+            .info
+                .title
+                    font-size: 6vw
     @media screen and ( max-width: 900px )
         .card
             flex-direction: column
@@ -12,6 +15,13 @@
                 padding-left: 0
             .info
                 width: 110%
+                min-height: 10em
+                justify-content: space-around
+                .title
+                    font-size: 8vw
+                .selector
+                    top: 0
+                    position: relative
 
     @media screen and ( max-width: 600px )
         place-items: start center
@@ -41,7 +51,13 @@
                     border-radius: 0.5em
             .info
                 border-radius: 0.8em
+                padding: 0.75em
                 width: 110%
+                .title
+                    font-size: 9vw
+                .selector
+                    .collection
+                        font-size: 1em
                 .logo
                     img
                         width: 80%
@@ -76,3 +92,13 @@
             .info
                 min-height: 10em
                 width: 112.5%
+                .title
+                    font-size: 9vw
+                .selector
+
+                    .collection
+                        padding: 0.5em 0.5em
+                        border-radius: 0 0.75em 0.75em 0
+                        &:first-child
+                            margin: 0
+                            border-radius: 0.75em 0 0 0.75em
